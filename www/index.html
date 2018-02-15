@@ -144,7 +144,6 @@
     <p id="datestamp" class="stamp">Published Feb. 15, 2018</p>
 
     <p>
-    Since the mass shooting at Sandy Hook Elementary School in Newtown, Connecticut, more than 1,700 died in subsequent mass shootings. More than 6,000 suffered injuries in <span id="shootings-count"></span> mass shootings.
     </p>
     <p>
         Explore these grim incidents in this map of mass shootings in the United States.
@@ -160,55 +159,55 @@
             <select id="states" name="states">
                 <option value="all">All</option>
                 <option value="state-alabama">Alabama</option>
-                <option value="state-alaska">Alaska</option>
+                <option value="state-alaska" disabled="disabled">Alaska</option>
                 <option value="state-arizona">Arizona</option>
-                <option value="state-arkansas">Arkansas</option>
+                <option value="state-arkansas" disabled="disabled">Arkansas</option>
                 <option value="state-california">California</option>
-                <option value="state-colorado">Colorado</option>
-                <option value="state-connecticut">Connecticut</option>
-                <option value="state-delaware">Delaware</option>
-                <option value="state-district-of-columbia">District Of Columbia</option>
+                <option value="state-colorado" disabled="disabled">Colorado</option>
+                <option value="state-connecticut" disabled="disabled">Connecticut</option>
+                <option value="state-delaware" disabled="disabled">Delaware</option>
+                <option value="state-district-of-columbia" disabled="disabled">District Of Columbia</option>
                 <option value="state-florida">Florida</option>
-                <option value="state-georgia">Georgia</option>
+                <option value="state-georgia" disabled="disabled">Georgia</option>
                 <option value="state-hawaii" disabled="disabled">Hawaii</option>
                 <option value="state-idaho" disabled="disabled">Idaho</option>
-                <option value="state-illinois">Illinois</option>
-                <option value="state-indiana">Indiana</option>
-                <option value="state-iowa">Iowa</option>
-                <option value="state-kansas">Kansas</option>
+                <option value="state-illinois" disabled="disabled">Illinois</option>
+                <option value="state-indiana" disabled="disabled">Indiana</option>
+                <option value="state-iowa" disabled="disabled">Iowa</option>
+                <option value="state-kansas" disabled="disabled">Kansas</option>
                 <option value="state-kentucky">Kentucky</option>
                 <option value="state-louisiana">Louisiana</option>
-                <option value="state-maine">Maine</option>
+                <option value="state-maine" disabled="disabled">Maine</option>
                 <option value="state-maryland">Maryland</option>
-                <option value="state-massachusetts">Massachusetts</option>
+                <option value="state-massachusetts" disabled="disabled">Massachusetts</option>
                 <option value="state-michigan">Michigan</option>
                 <option value="state-minnesota">Minnesota</option>
-                <option value="state-mississippi">Mississippi</option>
-                <option value="state-missouri">Missouri</option>
-                <option value="state-montana">Montana</option>
-                <option value="state-nebraska">Nebraska</option>
-                <option value="state-nevada">Nevada</option>
+                <option value="state-mississippi" disabled="disabled">Mississippi</option>
+                <option value="state-missouri" disabled="disabled">Missouri</option>
+                <option value="state-montana" disabled="disabled">Montana</option>
+                <option value="state-nebraska" disabled="disabled">Nebraska</option>
+                <option value="state-nevada" disabled="disabled">Nevada</option>
                 <option value="state-new-hampshire" disabled="disabled">New Hampshire</option>
-                <option value="state-new-jersey">New Jersey</option>
-                <option value="state-new-mexico">New Mexico</option>
+                <option value="state-new-jersey" disabled="disabled">New Jersey</option>
+                <option value="state-new-mexico" disabled="disabled">New Mexico</option>
                 <option value="state-new-york">New York</option>
                 <option value="state-north-carolina">North Carolina</option>
                 <option value="state-north-dakota" disabled="disabled">North Dakota</option>
-                <option value="state-ohio">Ohio</option>
-                <option value="state-oklahoma">Oklahoma</option>
-                <option value="state-oregon">Oregon</option>
+                <option value="state-ohio" disabled="disabled">Ohio</option>
+                <option value="state-oklahoma" disabled="disabled">Oklahoma</option>
+                <option value="state-oregon" disabled="disabled">Oregon</option>
                 <option value="state-pennsylvania">Pennsylvania</option>
-                <option value="state-rhode-island">Rhode Island</option>
-                <option value="state-south-carolina">South Carolina</option>
-                <option value="state-south-dakota">South Dakota</option>
-                <option value="state-tennessee">Tennessee</option>
+                <option value="state-rhode-island" disabled="disabled">Rhode Island</option>
+                <option value="state-south-carolina" disabled="disabled">South Carolina</option>
+                <option value="state-south-dakota" disabled="disabled">South Dakota</option>
+                <option value="state-tennessee" disabled="disabled">Tennessee</option>
                 <option value="state-texas">Texas</option>
-                <option value="state-utah">Utah</option>
-                <option value="state-vermont">Vermont</option>
-                <option value="state-virginia">Virginia</option>
+                <option value="state-utah" disabled="disabled">Utah</option>
+                <option value="state-vermont" disabled="disabled">Vermont</option>
+                <option value="state-virginia" disabled="disabled">Virginia</option>
                 <option value="state-washington">Washington</option>
-                <option value="state-west-virginia">West Virginia</option>
-                <option value="state-wisconsin">Wisconsin</option>
+                <option value="state-west-virginia" disabled="disabled">West Virginia</option>
+                <option value="state-wisconsin" disabled="disabled">Wisconsin</option>
                 <option value="state-wyoming" disabled="disabled">Wyoming</option>
             </select>
                 <div class="select_arrow"></div>
@@ -230,6 +229,7 @@
                         Shooting with at least one fatality
                     </label>
                 </li>
+                <!--
                 <li>
                     <input type="radio" name="deaths" id="death-3" value="death-3">
                     <label for="death-3">
@@ -251,6 +251,7 @@
                         10+ fatalities
                     </label>
                 </li>
+                -->
             </ul>
         </div>
     </fieldset>
@@ -260,7 +261,7 @@
 
 <section id="shootings">
     <p class="latest-news">
-        <a href="http://www.nydailynews.com/tags/mass-murder">THE LATEST</a>: 
+        <a href="http://www.nydailynews.com/tags/school-shootings">THE LATEST</a>: 
         <strong id="latest-news-headline"></strong>
         <br>PHOTO GALLERY: <a href="http://www.nydailynews.com/news/daily-news-covers-mass-shootings-sandy-hook-gallery-1.2453211">Daily News front-pages on mass shootings</a>
     </p>
@@ -279,19 +280,18 @@
             return text;
         }
         s.onload = function() { callback(); }
-        s.setAttribute('src', '//interactive.nydailynews.com/project/las-vegas-victims/tag-mass-murder-1.js?' + rando() + '=1');
+        s.setAttribute('src', '//interactive.nydailynews.com/feeds/tag-school-shooting-1.js?' + rando() + '=1');
         document.getElementsByTagName('head')[0].appendChild(s);
         function callback() {
             document.getElementById('latest-news-headline').innerHTML = hed;
         }
     </script>
 
-    <p class="caption">Data from <a href="http://www.gunviolencearchive.org">Gun Violence Archive</a></p>
-    <p class="stamp">Data last updated Feb. 14, 2018</p>
+    <p class="stamp">Data last updated Feb. 15, 2018</p>
 </section>
 
 <div>
-    <p class="caption">Interactive by Joe Murphy</p>
+    <p class="caption">Interactive by Joe Murphy and Steve Smirti</p>
 </div>
 
         </div>
