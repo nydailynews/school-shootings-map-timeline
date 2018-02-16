@@ -13,19 +13,6 @@
     "headline": ""
   },
   {
-    "Incident Date": "4-Jan-18",
-    "School": "New Start High School",
-    "Address": "614 SW 120th St, Seattle, WA 98146",
-    "City Or County": "Seattle",
-    "State": "Washington",
-    "killed": 0,
-    "injured": 0,
-    "lat": 47.496565,
-    "long": -122.34266,
-    "url": "",
-    "headline": ""
-  },
-  {
     "Incident Date": "10-Jan-18",
     "School": "Coronado Elementary School",
     "Address": "5148 S Coronado School Dr, Sierra Vista, AZ 85650",
@@ -199,7 +186,7 @@
     "School": "Harmony Learning Center",
     "Address": "1961 County Rd C E, Maplewood, MN 55109",
     "City Or County": "Maplewood",
-    "State": "Minnesotta",
+    "State": "Minnesota",
     "killed": 0,
     "injured": 0,
     "lat": 45.020842,
