@@ -299,7 +299,9 @@
 
 <script src="//interactive.nydailynews.com/js/jquery.min.js"></script>
 <script src="//interactive.nydailynews.com/js/leaflet/1.2.0/leaflet.js"></script>
+<!--
 <script src="//interactive.nydailynews.com/js/leaflet/markercluster/1.1.0/leaflet.markercluster.js"></script>
+-->
 <script>
 var center_point = [39.5,-98.35];
 var shootings = 0;
@@ -399,7 +401,7 @@ var m = {
     },
     init: function()
     {
-        this.clustergroup = L.markerClusterGroup();
+        this.clustergroup = L.layerGroup();
         L.tileLayer(this.tile, {
             attribution: this.attribution,
             maxZoom: 16
@@ -515,7 +517,7 @@ var panel = {
             else $('#states').val('all');
 
             m.clustergroup.remove();
-            m.clustergroup = L.markerClusterGroup();
+            m.clustergroup = L.layerGroup();
             m.load_markers(value);
             m.map.addLayer(m.clustergroup);
 
