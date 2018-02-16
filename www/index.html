@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-    <title>MAP: School shootings in the U.S., 2018 - New York Daily News</title>
+    <title>TIMELINE & MAP: School shootings in the U.S., 2018 - New York Daily News</title>
     <link rel="icon" type="image/png" href="http://interactive.nydailynews.com/favicons.png">
     <!-- DEFAULT -->
     <meta charset="utf-8">
@@ -33,7 +33,7 @@
     <!-- THUMBNAIL IMAGE-->
     <meta property="og:image" content="http://interactive.nydailynews.com/map/school-shootings/img/share.jpg" />
     <meta name="twitter:image" content="http://interactive.nydailynews.com/map/school-shootings/img/share.jpg" />
-    <meta name="twitter:image:alt" content="An image of a map marked with regional counts of the number of mass shootings across the United States" />
+    <meta name="twitter:image:alt" content="An image of a map" />
     <meta property="og:image:width" content="1024" />
     <meta property="og:image:height" content="512" />
 
@@ -45,7 +45,7 @@
             "headline": "MAP: School shootings in the U.S., 2018",
             "url": "http://interactive.nydailynews.com/map/school-shootings/",
             "thumbnailUrl": "http://interactive.nydailynews.com/map/school-shootings/img/share.jpg",
-            "dateCreated": "2018-02-15T16:00:00Z",
+            "dateCreated": "2018-02-16T16:00:00Z",
             "articleSection": "Interactive",
             "creator": ["Interactive Project","Joe Murphy"],
             "keywords": ["interactive map","interactive project","interactive","mass murder","las vegas","gun violence"]
@@ -101,7 +101,9 @@
     <link rel="stylesheet" href="//www.nydailynews.com/nydn/c/rh.css">
     <link rel="stylesheet" href="css/style.css?v1">
     <link rel="stylesheet" href="//interactive.nydailynews.com/js/leaflet/1.2.0/leaflet.css">
+	<!--
     <link rel="stylesheet" href="//interactive.nydailynews.com/js/leaflet/markercluster/1.1.0/MarkerCluster.Default.css">
+	-->
 
     <style>
 
@@ -128,7 +130,7 @@
         <div>
 
 <div class="intro">
-    <p class="overline">How many school shootings in 2018?</p>
+    <p class="overline">school shootings</p>
     <h1>MAP: School shootings in the United States, 2018</h1>
     <div>
         <ul class="ra-share" id="ra-share-top" style="text-align: center;">
@@ -142,18 +144,15 @@
     <p class="stamp">Updated Feb. 14, 2018</p>
     -->
     <p id="datestamp" class="stamp">Published Feb. 15, 2018</p>
-
     <p>
-    </p>
-    <p>
-        Explore these grim incidents in this map of mass shootings in the United States.
+       People shooting guns at schools has become an all-too-common occurence. Watch our map-timeline of school shooting events, or filter events by location and severity.
     </p>
 </div>
 
 <section id="map">
     <form id="panel">
     <fieldset id="filter" style="text-align: center;">
-        <legend>Filter mass shootings by:</legend>
+        <legend>Filter school shootings by:</legend>
 
         <div class="select">
             <select id="states" name="states">
@@ -219,7 +218,7 @@
                     <input type="radio" name="deaths" id="all" value="all" checked>
                     <label for="all">
                         <div class="check"></div>
-                        All mass shootings
+                        All school shootings
                     </label>
                 </li>
                 <li>
@@ -266,7 +265,7 @@
         <br>PHOTO GALLERY: <a href="http://www.nydailynews.com/news/daily-news-covers-mass-shootings-sandy-hook-gallery-1.2453211">Daily News front-pages on mass shootings</a>
     </p>
 	<p class="latest-news">
-		More maps: 
+        More maps: <a href="http://interactive.nydailynews.com/map/mass-shootings-since-sandy-hook/">Mass shootings in the U.S. since 2013</a>
 	</p>
 
     <script>
@@ -280,7 +279,7 @@
             return text;
         }
         s.onload = function() { callback(); }
-        s.setAttribute('src', '//interactive.nydailynews.com/feeds/tag-school-shooting-1.js?' + rando() + '=1');
+        s.setAttribute('src', '//interactive.nydailynews.com/feeds/tag-school-shootings-1.js?' + rando() + '=1');
         document.getElementsByTagName('head')[0].appendChild(s);
         function callback() {
             document.getElementById('latest-news-headline').innerHTML = hed;
@@ -551,7 +550,6 @@ var panel = {
                 this.hash = 'all';
                 this.hash_parts = ['all'];
                 m.load_markers('all');
-                //m.map.addLayer(m.clustergroup);
             }
 
             // Add event handler to the form elements.
@@ -569,10 +567,206 @@ var panel = {
                 panel.action('select', this.value);
             }
                                                                                              
-            document.getElementById('shootings-count').textContent = "the " + shootings.toLocaleString() + " subsequent";
+            //document.getElementById('shootings-count').textContent = "the " + shootings.toLocaleString() + " subsequent";
         }
 };
 m.init();
+
+
+// From http://jsbin.com/iyexuVAR/8/edit?html,output
+function ScrubberView() {
+  this.makeAccessors();
+  this.createDOM();
+  this.attachListeners();
+  this.onValueChanged = function () {};
+  this.onScrubStart = function () {};
+  this.onScrubEnd = function () {};
+}
+
+ScrubberView.prototype.makeAccessors = function () {
+  var value = 0;
+  var min = 0;
+  var max = 1;
+  var step = 0;
+  var orientation = 'horizontal';
+
+  this.value = function (_value) {
+    if (_value === undefined) return value;
+    if (value === _value) return this;
+
+    _value = Math.max(min, Math.min(max, _value));
+
+    if (step > 0) {
+      var nsteps = Math.round((_value - min)/step);
+
+      var invStep = 1/step;
+      if (invStep === Math.round(invStep)) {
+        _value = (min*invStep + nsteps)/invStep;
+      } else {
+        _value = (min/step + nsteps)*step;
+      }
+
+      value = Math.max(min, Math.min(max, _value));
+    } else {
+      value = _value;
+    }
+
+    this.redraw();
+    this.onValueChanged(value);
+    return this;
+  };
+
+  this.min = function (_min) {
+    if (_min === undefined) return min;
+    if (min === _min) return this;
+    min = _min;
+    this.redraw();
+    return this;
+  };
+
+  this.max = function (_max) {
+    if (_max === undefined) return max;
+    if (max === _max) return this;
+    max = _max;
+    this.redraw();
+    return this;
+  };
+
+  this.step = function (_step) {
+    if (_step === undefined) return step;
+    if (step === _step) return this;
+    step = _step;
+    this.redraw();
+    return this;
+  };
+
+  this.orientation = function(_orientation) {
+    if (_orientation === undefined) return orientation;
+    if (_orientation === orientation) return this;
+    orientation = _orientation;
+    this.redraw();
+    return this;
+  };
+};
+
+ScrubberView.prototype.createDOM = function () {
+  this.elt = document.createElement('div');
+  this.track = document.createElement('div');
+  this.thumb = document.createElement('div');
+
+  this.elt.className = this.orientation() === 'horizontal' ? 'scrubber' : 'scrubber-vert';
+  this.track.className = 'track';
+  this.thumb.className = 'thumb';
+
+  this.elt.appendChild(this.track);
+  this.elt.appendChild(this.thumb);
+};
+
+ScrubberView.prototype.redraw = function () {
+  var frac = (this.value() - this.min())/(this.max() - this.min());
+  if (this.orientation() === 'horizontal') {
+    this.elt.className = 'scrubber';
+    this.thumb.style.top = '50%';
+    this.thumb.style.left = frac*100 + '%';
+  }
+  else {
+    this.elt.className = 'scrubber-vert';
+    this.thumb.style.left = '50%';
+    this.thumb.style.top = 100 - (frac*100) + '%';
+  }
+};
+
+ScrubberView.prototype.attachListeners = function ()  {
+  var self = this;
+  var mousedown = false;
+  var cachedLeft;
+  var cachedWidth;
+  var cachedTop;
+  var cachedHeight;
+
+  var start = function (evt) {
+    evt.preventDefault();
+    self.onScrubStart(self.value());
+
+    mousedown = true;
+    var rect = self.elt.getBoundingClientRect();
+    // NOTE: page[X|Y]Offset and the width and height
+    // properties of getBoundingClientRect are not
+    // supported in IE8 and below.
+    //
+    // Scrubber doesn't attempt to support IE<9.
+    var xOffset = window.pageXOffset;
+    var yOffset = window.pageYOffset;
+
+    cachedLeft = rect.left + xOffset;
+    cachedWidth = rect.width;
+    cachedTop = rect.top + yOffset;
+    cachedHeight = rect.height;
+    self.thumb.className +=  ' dragging';
+  };
+
+  var stop = function () {
+    mousedown = false;
+    cachedLeft = undefined;
+    cachedWidth = undefined;
+    cachedTop = undefined;
+    cachedHeight = undefined;
+    self.thumb.className = 'thumb';
+    self.onScrubEnd(self.value());
+  };
+
+  var setValueFromPageX = function (pageX) {
+    var frac = Math.min(1, Math.max((pageX - cachedLeft)/cachedWidth, 0));
+    self.value((1-frac)*self.min() + frac*self.max());
+  };
+
+  var setValueFromPageY = function (pageY) {
+    var frac = Math.min(1, Math.max(1 - (pageY - cachedTop)/cachedHeight, 0));
+    self.value((1-frac)*self.min() + frac*self.max());
+  };
+
+  this.elt.addEventListener('mousedown', start);
+  this.elt.addEventListener('touchstart', start);
+
+  document.addEventListener('mousemove', function (evt) {
+    if (!mousedown) return;
+    evt.preventDefault();
+    if (self.orientation() === 'horizontal')
+      setValueFromPageX(evt.pageX);
+    else
+      setValueFromPageY(evt.pageY);
+  });
+
+  document.addEventListener('touchmove', function (evt) {
+    if (!mousedown) return;
+    evt.preventDefault();
+    if (self.orientation() === 'horizontal')
+      setValueFromPageX(evt.changedTouches[0].pageX);
+    else
+      setValueFromPageY(evt.changedTouches[0].pageY);
+  });
+
+  this.elt.addEventListener('mouseup', function (evt) {
+    if (!mousedown) return;
+    evt.preventDefault();
+    if (self.orientation() === 'horizontal')
+      setValueFromPageX(evt.pageX);
+    else
+      setValueFromPageY(evt.pageY);
+  });
+
+  this.elt.addEventListener('touchend', function (evt) {
+    if (!mousedown) return;
+    evt.preventDefault();
+    if (self.orientation() === 'horizontal')
+      setValueFromPageX(evt.changedTouches[0].pageX);
+    else
+      setValueFromPageY(evt.changedTouches[0].pageY);
+  });
+
+  document.addEventListener('mouseup', stop);
+  document.addEventListener('touchend', stop);
+};
 </script>
 <!-- CONTENT-END -->
 
