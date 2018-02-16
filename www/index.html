@@ -153,7 +153,13 @@
     <form id="panel">
     <fieldset id="scrubber">
         <legend>Play through this year's school shootings:</legend>
+        <div id="controls">
+            <button id="play">Play Timeline</button>
+        </div>
     </fieldset>
+    
+    <div id="shooting-map"></div>
+
     <fieldset id="filter" style="text-align: center;">
         <legend>Filter school shootings by:</legend>
 
@@ -258,7 +264,6 @@
         </div>
     </fieldset>
     </form>
-    <div id="shooting-map"></div>
 </section>
 
 <section id="shootings">
@@ -591,7 +596,7 @@ m.init();
 var scrub = {
     init: function() {
         this.scrubber = new ScrubberView();
-        document.getElementById('scrubber').appendChild(this.scrubber.elt);
+        document.getElementById('controls').appendChild(this.scrubber.elt);
     }
 };
 
@@ -789,6 +794,7 @@ ScrubberView.prototype.attachListeners = function ()  {
   document.addEventListener('mouseup', stop);
   document.addEventListener('touchend', stop);
 };
+scrub.init();
 </script>
 <!-- CONTENT-END -->
 
