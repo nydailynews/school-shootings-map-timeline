@@ -316,6 +316,16 @@ var m = {
     current_layer: 'all',
     marker_group: { 'all': [] },
     layer_group: {},
+    icon: function(classname) { 
+        return new L.divIcon({
+        className: "pin inactive-pin " + classname,
+        iconSize: L.point(20,20),
+        iconAnchor: [20,20],
+        //labelAnchor: [-6, 0],
+        //popupAnchor: [0, -36],
+        //html: '<span style="background-color:red;" />'
+        });
+    },
     slugify: function(text) {
         // from https://gist.github.com/mathewbyrne/1280286
         return text.toString().toLowerCase()
