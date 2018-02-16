@@ -393,6 +393,12 @@ a {
 	max-height: 100%;
 }
 
+#scrubber {
+    text-align: center;
+}
+#scrubber .scrubber {
+    display: inline-block;
+}
 
 .scrubber {
     margin-top: 10px;

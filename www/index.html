@@ -151,6 +151,9 @@
 
 <section id="map">
     <form id="panel">
+    <fieldset id="scrubber">
+        <legend>Play through this year's school shootings:</legend>
+    </fieldset>
     <fieldset id="filter" style="text-align: center;">
         <legend>Filter school shootings by:</legend>
 
@@ -317,6 +320,7 @@ var m = {
     marker_group: { 'all': [] },
     layer_group: {},
     icon: function(classname) { 
+        if ( classname === null ) classname = '';
         return new L.divIcon({
         className: "pin inactive-pin " + classname,
         iconSize: L.point(20,20),
@@ -584,6 +588,12 @@ var panel = {
 };
 m.init();
 
+var scrub = {
+    init: function() {
+        this.scrubber = new ScrubberView();
+        document.getElementById('scrubber').appendChild(this.scrubber.elt);
+    }
+};
 
 // From http://jsbin.com/iyexuVAR/8/edit?html,output
 function ScrubberView() {
