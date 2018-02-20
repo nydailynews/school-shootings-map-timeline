@@ -17,9 +17,9 @@
     <meta name="twitter:title" content='MAP: School shootings in the U.S., 2018' />
 
     <!-- DESCRIPTION -->
-    <meta name="description" content="A map of school shootings in the U.S. in 2018, updated regularly" />
-    <meta property="og:description" content="A map of school shootings in the U.S. in 2018, updated regularly" />
-    <meta name="twitter:description" content="A map of school shootings in the U.S. in 2018, updated regularly" />
+    <meta name="description" content="A map of school shootings in the U.S. in 2018, with injury and fatality counts, updated regularly." />
+    <meta property="og:description" content="A map and timeline of school shootings in the U.S. in 2018, updated regularly" />
+    <meta name="twitter:description" content="A map and timeline of school shootings in the U.S. in 2018, updated regularly" />
 
     <!-- KEYWORD -->
     <meta name="keywords" content="school shootings,school shootings map" />
@@ -31,9 +31,9 @@
     <meta name="twitter:url" content="http://interactive.nydailynews.com/map/school-shootings/" />
 
     <!-- THUMBNAIL IMAGE-->
-    <meta property="og:image" content="http://interactive.nydailynews.com/map/school-shootings/img/share.jpg" />
-    <meta name="twitter:image" content="http://interactive.nydailynews.com/map/school-shootings/img/share.jpg" />
-    <meta name="twitter:image:alt" content="An image of a map" />
+    <meta property="og:image" content="http://interactive.nydailynews.com/map/school-shootings/img/school-shootings-map.jpg" />
+    <meta name="twitter:image" content="http://interactive.nydailynews.com/map/school-shootings/img/school-shootings-map.jpg" />
+    <meta name="twitter:image:alt" content="An image of two photos of school shooting memorials in Parkland, Florida." />
     <meta property="og:image:width" content="1024" />
     <meta property="og:image:height" content="512" />
 
@@ -42,9 +42,9 @@
         {
             "@context": "http://schema.org",
             "@type": "NewsArticle",
-            "headline": "MAP: School shootings in the U.S., 2018",
+            "headline": "MAP/TIMELINE: School shootings in the U.S., 2018",
             "url": "http://interactive.nydailynews.com/map/school-shootings/",
-            "thumbnailUrl": "http://interactive.nydailynews.com/map/school-shootings/img/share.jpg",
+            "thumbnailUrl": "http://interactive.nydailynews.com/map/school-shootings/img/school-shootings-map.jpg",
             "dateCreated": "2018-02-21T16:00:00Z",
             "articleSection": "Interactive",
             "creator": ["Interactive Project","Joe Murphy","Steve Smirti"],
@@ -653,6 +653,8 @@ var scrub = {
     press_play: function() {
         // 1. Wipe the map of markers
         this.in_play = 1;
+        this.killed = 0;
+        this.injured = 0;
         var play_button = document.getElementById('play');
         play_button.classList.add('hide');
         m.clear_all_markers();
@@ -698,7 +700,7 @@ var scrub = {
         var loc = 'In ';
         for ( var j = 0; j < len; j ++ ) {
             //if ( j == 0 ) loc += 
-            console.log(this.events_meta[day][j]);
+            //console.log(this.events_meta[day][j]);
             this.killed += this.events_meta[day][j]['killed'];
             this.injured += +this.events_meta[day][j]['injured'];
             m.clustergroup.addLayer(this.events[day][j]);
