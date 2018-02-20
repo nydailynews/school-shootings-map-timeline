@@ -636,13 +636,17 @@ var scrub = {
         // i is the number of days into the year we're playing.
         // I'm not sure I could have written a more dense description of these two variables.
         var day = scrub.days[i];
+        var day_slug = m.slugify(day);
         var len = this.events[day].length;
-        this.scrubber.value(i);
         if ( len == 0 ) return;
         
-        for ( i = 0; i < len; i ++ ) {
-            m.clustergroup.addLayer(this.events[day][i]);
+        for ( var j = 0; j < len; j ++ ) {
+            m.clustergroup.addLayer(this.events[day][j]);
         }
+        setTimeout( function() {
+            $('.' + day_slug).removeClass('active-pin');
+            $('.' + day_slug).addClass('inactive-pin'); }, 100 );
+        this.scrubber.value(i);
     },
     format_current_date: function(d) {
         if ( d === null ) var d = new Date();
