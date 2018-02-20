@@ -614,22 +614,42 @@ var scrub = {
     current_date: '',
     press_play: function() {
         // 1. Wipe the map of markers
-        // 2. Loop through the this.days() array
-        // 3. For each day, loop through the map data and if there's a shooting that matches the day, add it to the map and update the info box.
+        console.info("CLEAR MAP");
         m.clear_all_markers();
+
+        // 2. Group the markers by day.
         var data = m.data;
+        var days = {};
         for ( var i = 0; i < this.julian_date; i ++ ) {
+
             // There are definitely more efficient ways to do this.
             var day = this.days[i];
+            days[day] = [];
             var len = data.length;
             for ( var j = 0; j < len; j ++ ) {
                 if ( data[j]['Incident Date'] == day ) {
-                    marker = m.create_marker(data[j]);
-                    m.clustergroup.addLayer(marker);
+                    days[day].push(m.create_marker(data[j]));
+                    //m.clustergroup.addLayer(marker);
                     //data.splice(j, 1);
                 }
             }
         }
+        console.log("DAYS", days);
+        // 3. Loop through the this.days() object
+        /*
+        for ( var i = 0; i < this.julian_date; i ++ ) {
+        console.info("LOOP MAP", i);
+            setTimeout( function(i) {
+                var day = this.days[i];
+                if ( days[day].length == 0 ) continue;
+
+                // 4. For each day, add the markers for that particular day.
+                console.log(days[day]);
+                
+                // 5. Also, advance the scrubber.
+                }, 500);
+        }
+        */
     },
     format_current_date: function(d) {
         if ( d === null ) var d = new Date();
@@ -643,10 +663,9 @@ var scrub = {
 
         this.scrubber = new ScrubberView();
         document.getElementById('controls').appendChild(this.scrubber.elt);
-        // JULIAN DATE, via https://stackoverflow.com/questions/11759992/calculating-jdayjulian-day-in-javascript
+        // NUMBER OF DAYS IN THE YEAR via https://stackoverflow.com/questions/8619879/javascript-calculate-the-day-of-the-year-1-366
         var date = new Date();
-        var time = date.getTime();
-        this.julian_date = Math.floor((time / 86400000) - (date.getTimezoneOffset()/1440) + 2440587.5);
+        this.julian_date = (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
 
         this.scrubber.max(this.julian_date);
     }
