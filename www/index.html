@@ -135,7 +135,7 @@
     <div>
         <ul class="ra-share" id="ra-share-top" style="text-align: center;">
             <li class="rt-share-f"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://interactive.nydailynews.com/map/school-shootings/">facebook</a> </li>
-            <li class="ra-share-t"> <a target="_blank" href="https://twitter.com/intent/tweet?text=Here's a map and timeline of school shootings in the U.S. this year&url=http://interactive.nydailynews.com/map/school-shootings/&via=NYDNi&related=nydailynews,joemurph">Tweet</a></li>
+            <li class="ra-share-t"> <a target="_blank" href="https://twitter.com/intent/tweet?text=This is a map and timeline of the school shootings in the U.S. in 2018&url=http://interactive.nydailynews.com/map/school-shootings/&via=NYDNi&related=nydailynews,joemurph" id="twitterlink">Tweet</a></li>
             <li class="ra-share-e"> <a href="mailto:?subject=A map and timeline of school shootings in the U.S. this year&body=http://interactive.nydailynews.com/map/school-shootings/">email</a> </li>
         </ul>
     </div>
@@ -168,7 +168,7 @@
 
         <div class="select">
             <select id="states" name="states">
-                <option value="all">All</option>
+                <option value="all">All states</option>
                 <option value="state-alabama">Alabama</option>
                 <option value="state-alaska" disabled="disabled">Alaska</option>
                 <option value="state-arizona">Arizona</option>
@@ -204,7 +204,7 @@
                 <option value="state-new-york">New York</option>
                 <option value="state-north-carolina">North Carolina</option>
                 <option value="state-north-dakota" disabled="disabled">North Dakota</option>
-                <option value="state-ohio" disabled="disabled">Ohio</option>
+                <option value="state-ohio">Ohio</option>
                 <option value="state-oklahoma" disabled="disabled">Oklahoma</option>
                 <option value="state-oregon" disabled="disabled">Oregon</option>
                 <option value="state-pennsylvania">Pennsylvania</option>
@@ -237,7 +237,7 @@
                     <input type="radio" name="deaths" id="death-1" value="death-1">
                     <label for="death-1">
                         <div class="check"><div class="inside"></div></div>
-                        Shooting with at least one fatality
+                        Shootings with at least one fatality
                     </label>
                 </li>
                 <!--
@@ -495,6 +495,7 @@ var m = {
             }
             panel.init();
             scrub.init();
+            update_twitter();
         });
         this.map.addLayer(this.clustergroup);
     }
@@ -953,6 +954,12 @@ ScrubberView.prototype.attachListeners = function ()  {
   document.addEventListener('mouseup', stop);
   document.addEventListener('touchend', stop);
 };
+function update_twitter(number_killed) {
+    var a = document.getElementById('twitterlink');
+    var old_href = a.getAttribute('href');
+    var new_href = old_href.replace('the school shootings', 'the ' + m.data.length + ' school shootings');
+    a.setAttribute('href', new_href);
+}
 </script>
 <!-- CONTENT-END -->
 
