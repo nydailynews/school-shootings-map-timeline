@@ -642,7 +642,7 @@ var scrub = {
         var inter = setInterval( function() {
             scrub.play_date(events, i);
             i ++;
-            if ( i >= scrub.julian_date ) inter = null;
+            if ( i >= scrub.julian_date ) clearInterval(inter);
         }, 1000);
     },
     play_date: function(events, i) {
