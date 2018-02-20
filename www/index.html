@@ -740,8 +740,24 @@ var scrub = {
 
         this.scrubber.max(this.julian_date);
         this.scrubber.step(1);
+        this.prev = 0;
         this.scrubber.onValueChanged = function (value) {
-            if ( this.in_play === 0 ) console.log(value); // the value at time of invocation
+            if ( value !== scrub.prev ) {
+                //scrub.play_date(value);
+            }
+        }
+        this.scrubber.onScrubEnd = function (value) {
+            if ( scrub.in_play == 0 ) {
+                console.log(value); // the value at time of invocation
+                var i = 0;
+                scrub.killed = 0;
+                scrub.injured = 0;
+                m.clear_all_markers();
+                while ( i < value ) {
+                    scrub.play_date(i);
+                    i ++;
+                }
+            }
         }
 
         // Put together the map markers we need to be able to place on the map
