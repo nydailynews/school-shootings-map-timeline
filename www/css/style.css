@@ -108,21 +108,18 @@ legend {
 	padding-top: 10px;
 	margin: 5px auto;
 }
-
-.active-pin {
-    background-color: #f00;
+button {
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #136DF8;
+    color: white;
+    height: 43px;
+    border: 0;
 }
-.inactive-pin {
-    background-color: #aaa;
-}
-.pin {
-    width: 3rem;
-    height: 3rem;
-    display: block;
-    border-radius: 1.5rem 1.5rem 0;
-    border: 1px solid #FFFFFF;
-    -webkit-transition: all .2s ease-out;
-    transition: all .2s ease-out;
+button#play {
+	position: relative;
+	top: -15px;
+	left: -20px;
 }
 
 /*-----  DROPDOWN -----*/
