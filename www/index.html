@@ -460,7 +460,8 @@ var m = {
         }
         this.info.addTo(this.map);
 
-        this.infosub.options = { position: 'topright' };
+        if ( is_mobile == true ) this.infosub.options = { position: 'topleft' };
+        else this.infosub.options = { position: 'topright' };
         this.infosub.onAdd = function (map) {
             this._div = L.DomUtil.create('div', 'info');
             this.update();
