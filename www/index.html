@@ -318,7 +318,7 @@ var m = {
     config: {
         dev: document.location.hash === '#dev' ? 1 : 0,
     },
-    map: L.map('shooting-map', { minZoom: 3, maxZoom: 9, zoomControl:true, scrollWheelZoom:false }).setView(center_point, 4),
+    map: L.map('shooting-map', { minZoom: 3, maxZoom: 9, zoomControl:false, scrollWheelZoom:false }).setView(center_point, 4),
     markers: [],
     tile: 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png',
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
@@ -439,6 +439,23 @@ var m = {
             attribution: this.attribution,
             maxZoom: 16
         }).addTo(this.map);
+
+        // INFO WINDOW
+        // Functions that control the on-hover info windows
+        this.info.options = {
+            position: 'topleft'
+        };
+        this.info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info');
+            this.update();
+            return this._div;
+        };
+        this.info.update = function (name) {
+            if ( typeof name === 'undefined' ) this._div.innerHTML = '';
+            else this._div.innerHTML = name;
+        }
+        this.info.addTo(this.map);
+
         this.marker_group = L.layerGroup().addTo(this.map);
         // An item looks like this:
         /*
@@ -632,21 +649,26 @@ var scrub = {
         this.in_play = 0;
     },
     play_date: function(i) {
-        // events is an object with days for keys and markers in an array for the key on the day it happens.
-        // i is the number of days into the year we're playing.
-        // I'm not sure I could have written a more dense description of these two variables.
+        // i is the number of days into the year we want to show.
         var day = scrub.days[i];
         var day_slug = m.slugify(day);
         var len = this.events[day].length;
+        this.scrubber.value(i+1);
+
         if ( len == 0 ) return;
         
+        var loc = 'In ';
         for ( var j = 0; j < len; j ++ ) {
+            //if ( j == 0 ) loc += 
+            console.log(this.events[day][j]);
             m.clustergroup.addLayer(this.events[day][j]);
         }
+        var s = 's';
+        if ( len === 1 ) s = '';
+        m.info.update('<h3><span>' + m.numbers_lookup[len] + '</span> school shooting' + s + ' ' + day + '</h3>');
         setTimeout( function() {
             $('.' + day_slug).removeClass('active-pin');
             $('.' + day_slug).addClass('inactive-pin'); }, 100 );
-        this.scrubber.value(i);
     },
     format_current_date: function(d) {
         if ( d === null ) var d = new Date();

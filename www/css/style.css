@@ -213,9 +213,13 @@ legend {
 }
 .info h2, .info h3, .info h4
 {
+	text-transform: none;
     margin: 0 10px;
     padding: 0;
     color: #333;
+}
+.info h3 span {
+	text-transform: capitalize;
 }
 
 /*----- RADIO BUTTONS -----*/
