@@ -325,6 +325,7 @@ var m = {
     current_layer: 'all',
     marker_group: { 'all': [] },
     layer_group: {},
+    info: L.control(),
     icon: function(classname) { 
         if ( classname === null ) classname = '';
         return new L.divIcon({
@@ -401,10 +402,9 @@ var m = {
 
         // figure out which layer(s) to add the marker to.
         var killed_bucket = d['killed'];
-        if ( d['killed'] >= 10 ) killed_bucket = 10;
+        if ( d['killed'] >= 1 ) killed_bucket = 1;
         while ( killed_bucket > 0 ) {
-            if ( killed_bucket === 4 ) killed_bucket = 3;
-            else if ( killed_bucket > 5 && killed_bucket < 10 ) killed_bucket = 5;
+            //if ( killed_bucket > 5 && killed_bucket < 10 ) killed_bucket = 5;
             this.add_to_marker_group('death-' + killed_bucket, marker);
             killed_bucket -= 1;
         }

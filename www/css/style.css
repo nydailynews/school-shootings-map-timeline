@@ -184,6 +184,40 @@ legend {
 	border-top-color: #CCCCCC;
 }
 
+/*----- MAP -----*/
+.active-pin {
+    background-color: #f00;
+}
+.inactive-pin {
+    background-color: #aaa;
+}
+.pin {
+    width: 3rem;
+    height: 3rem;
+    display: block;
+    border-radius: 1.5rem 1.5rem 0;
+    border: 1px solid #FFFFFF;
+    -webkit-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+
+.info 
+{
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    float:left;
+}
+.info h2, .info h3, .info h4
+{
+    margin: 0 10px;
+    padding: 0;
+    color: #333;
+}
+
 /*----- RADIO BUTTONS -----*/
 
 article ul {
@@ -294,13 +328,6 @@ main p {
 	text-align: left;
 }
 
-.revenue {
-	width: 100%;
-	height: auto;
-	max-height: none;
-	position: ;
-	left: 0;
-}
 }
 /* TABLET-SPECIFIC */
 @media only screen and ( min-width: 728px ) and (max-width:1023px) {
