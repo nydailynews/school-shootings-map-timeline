@@ -672,6 +672,7 @@ var scrub = {
             }
         }, 300);
     },
+    deaths: 0,
     play_date: function(i) {
         // i is the number of days into the year we want to show.
         var day = scrub.days[i];
@@ -686,12 +687,14 @@ var scrub = {
         var loc = 'In ';
         for ( var j = 0; j < len; j ++ ) {
             //if ( j == 0 ) loc += 
-            console.log(this.events[day][j]);
+            console.log(this.events_meta[day][j]);
+            this.deaths += this.events_meta[day][j]['killed'];
             m.clustergroup.addLayer(this.events[day][j]);
         }
         var s = 's';
         if ( len === 1 ) s = '';
-        m.info.update('<h3><span>' + m.numbers_lookup[len] + '</span> school shooting' + s + ' ' + day_long + '</h3>');
+        m.info.update('<h3><span>' + m.numbers_lookup[len] + '</span> school shooting' + s + ' ' + day_long + '</h3>\n\
+        <p><span id="deaths">' + this.deaths + '</span> total deaths</p>');
         setTimeout( function() {
             $('.' + day_slug).removeClass('active-pin');
             $('.' + day_slug).addClass('inactive-pin'); }, 100 );
@@ -721,16 +724,19 @@ var scrub = {
 
         // Put together the map markers we need to be able to place on the map
         this.events = {};
+        this.events_meta = {};
         for ( var i = 0; i < this.julian_date; i ++ ) {
 
             // There are definitely more efficient ways to do this.
             var day = this.days[i];
             var day_slug = m.slugify(day);
             this.events[day] = [];
+            this.events_meta[day] = [];
             var len = m.data.length;
             for ( var j = 0; j < len; j ++ ) {
                 if ( m.data[j]['Incident Date'] == day ) {
                     this.events[day].push(m.create_marker(m.data[j], 'active-pin ' + day_slug));
+                    this.events_meta[day].push(m.data[j]);
                 }
             }
         }
