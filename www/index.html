@@ -629,8 +629,6 @@ var scrub = {
             for ( var j = 0; j < len; j ++ ) {
                 if ( data[j]['Incident Date'] == day ) {
                     events[day].push(m.create_marker(data[j]));
-                    //m.clustergroup.addLayer(marker);
-                    //data.splice(j, 1);
                 }
             }
         }
@@ -643,15 +641,19 @@ var scrub = {
             scrub.play_date(events, i);
             i ++;
             if ( i >= scrub.julian_date ) clearInterval(inter);
-        }, 1000);
+        }, 300);
     },
     play_date: function(events, i) {
-        console.info("LOOPED MAP", i, this);
+        // events is an object with days for keys and markers in an array for the key on the day it happens.
+        // i is the number of days into the year we're playing.
+        // I'm not sure I could have written a more dense description of these two variables.
         var day = scrub.days[i];
-        if ( events[day].length == 0 ) return;
-
-        console.log(events[day]);
+        var len = events[day].length;
+        if ( len == 0 ) return;
         
+        for ( i = 0; i < len; i ++ ) {
+            m.clustergroup.addLayer(events[day][i]);
+        }
     },
     format_current_date: function(d) {
         if ( d === null ) var d = new Date();
