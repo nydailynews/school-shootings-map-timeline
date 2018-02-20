@@ -619,37 +619,39 @@ var scrub = {
 
         // 2. Group the markers by day.
         var data = m.data;
-        var days = {};
+        var events = {};
         for ( var i = 0; i < this.julian_date; i ++ ) {
 
             // There are definitely more efficient ways to do this.
             var day = this.days[i];
-            days[day] = [];
+            events[day] = [];
             var len = data.length;
             for ( var j = 0; j < len; j ++ ) {
                 if ( data[j]['Incident Date'] == day ) {
-                    days[day].push(m.create_marker(data[j]));
+                    events[day].push(m.create_marker(data[j]));
                     //m.clustergroup.addLayer(marker);
                     //data.splice(j, 1);
                 }
             }
         }
-        console.log("DAYS", days);
+        console.log("DAYS", events);
         // 3. Loop through the this.days() object
-        /*
-        for ( var i = 0; i < this.julian_date; i ++ ) {
-        console.info("LOOP MAP", i);
-            setTimeout( function(i) {
-                var day = this.days[i];
-                if ( days[day].length == 0 ) continue;
+        // 4. For each day, add the markers for that particular day.
+        // 5. Also, advance the scrubber.
+        var i = 0;
+        var inter = setInterval( function() {
+            scrub.play_date(events, i);
+            i ++;
+            if ( i >= scrub.julian_date ) inter = null;
+        }, 1000);
+    },
+    play_date: function(events, i) {
+        console.info("LOOPED MAP", i, this);
+        var day = scrub.days[i];
+        if ( events[day].length == 0 ) return;
 
-                // 4. For each day, add the markers for that particular day.
-                console.log(days[day]);
-                
-                // 5. Also, advance the scrubber.
-                }, 500);
-        }
-        */
+        console.log(events[day]);
+        
     },
     format_current_date: function(d) {
         if ( d === null ) var d = new Date();
@@ -663,6 +665,7 @@ var scrub = {
 
         this.scrubber = new ScrubberView();
         document.getElementById('controls').appendChild(this.scrubber.elt);
+
         // NUMBER OF DAYS IN THE YEAR via https://stackoverflow.com/questions/8619879/javascript-calculate-the-day-of-the-year-1-366
         var date = new Date();
         this.julian_date = (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
