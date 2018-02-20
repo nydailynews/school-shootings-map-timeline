@@ -393,9 +393,9 @@ var m = {
         if ( typeof this.marker_group[slug] === 'undefined' ) this.marker_group[slug] = [];
         this.marker_group[slug].push(marker);
     },
-	create_marker: function(d)
-	{
-		// Make and return a leaflet marker.
+    create_marker: function(d)
+    {
+        // Make and return a leaflet marker.
         var marker = L.marker(new L.LatLng(d['lat'], d['long']), { icon: this.icon() })
         var date_str = this.convert_date(d['Incident Date']);
         var loc = d['City Or County'] + ', ' + d['State'];
@@ -405,12 +405,12 @@ var m = {
         var content = "<h3>" + loc + "</h3>\n\
                        <p>" + date_str + ': ' + injured_str + d['killed'] + " killed.</p>";
         marker.bindPopup(content);
-		return marker;
-	},
+        return marker;
+    },
     add_marker: function(d)
     {
         // Build out a marker, assign it to the appropriate marker_group(s).
-		marker = this.create_marker(d);
+        marker = this.create_marker(d);
         // figure out which layer(s) to add the marker to.
         var killed_bucket = d['killed'];
         if ( d['killed'] >= 1 ) killed_bucket = 1;
@@ -432,7 +432,7 @@ var m = {
     },
     init: function()
     {
-		// For reference: layer_group's are the reference markers, and clustergroup is the visible layer
+        // For reference: layer_group's are the reference markers, and clustergroup is the visible layer
         this.clustergroup = L.layerGroup();
         L.tileLayer(this.tile, {
             attribution: this.attribution,
@@ -622,13 +622,13 @@ var scrub = {
             // There are definitely more efficient ways to do this.
             var day = this.days[i];
             var len = data.length;
-			for ( var j = 0; j < len; j ++ ) {
-				if ( data[j]['Incident Date'] == day ) {
-					marker = m.create_marker(data[j]);
-					m.clustergroup.addLayer(marker);
-					//data.splice(j, 1);
-				}
-			}
+            for ( var j = 0; j < len; j ++ ) {
+                if ( data[j]['Incident Date'] == day ) {
+                    marker = m.create_marker(data[j]);
+                    m.clustergroup.addLayer(marker);
+                    //data.splice(j, 1);
+                }
+            }
         }
     },
     format_current_date: function(d) {
