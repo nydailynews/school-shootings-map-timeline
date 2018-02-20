@@ -405,16 +405,21 @@ var m = {
         var slug = m.slugify(d['Incident Date'] + '-' + d['City Or County'] + '-' + d['State']);
         var injured_str = d['injured'] + " injured, ";
         if ( d['injured'] == "" ) injured_str = "";
+
+        var link_str = '';
+        if ( d['url'] !== '' ) link_str = '<p><a href=' + d['url'] + '>' + d['headline'] + '</a></p>';
         var content = "<h3>" + loc + "</h3>\n\
-                       <p>" + date_str + ': ' + injured_str + d['killed'] + " killed.</p>";
+                       <p>" + date_str + ': ' + injured_str + d['killed'] + " killed.</p>" + link_str;
         marker.bindPopup(content);
         return marker;
     },
     add_marker: function(d)
     {
         // Build out a marker, assign it to the appropriate marker_group(s).
+
         marker = this.create_marker(d);
-        // figure out which layer(s) to add the marker to.
+
+        // Figure out which layer(s) to add the marker to.
         var killed_bucket = d['killed'];
         if ( d['killed'] >= 1 ) killed_bucket = 1;
         while ( killed_bucket > 0 ) {
