@@ -327,9 +327,9 @@ var m = {
     layer_group: {},
     info: L.control(),
     icon: function(classname) { 
-        if ( classname === null ) classname = '';
+        if ( typeof classname === 'undefined' ) classname = '';
         return new L.divIcon({
-        className: "pin inactive-pin " + classname,
+        className: "pin " + classname,
         iconSize: L.point(20,20),
         iconAnchor: [20,20],
         //labelAnchor: [-6, 0],
@@ -393,10 +393,11 @@ var m = {
         if ( typeof this.marker_group[slug] === 'undefined' ) this.marker_group[slug] = [];
         this.marker_group[slug].push(marker);
     },
-    create_marker: function(d)
+    create_marker: function(d, classname)
     {
         // Make and return a leaflet marker.
-        var marker = L.marker(new L.LatLng(d['lat'], d['long']), { icon: this.icon() })
+        if ( typeof classname === 'undefined' ) classname = 'inactive-pin';
+        var marker = L.marker(new L.LatLng(d['lat'], d['long']), { icon: this.icon(classname) })
         var date_str = this.convert_date(d['Incident Date']);
         var loc = d['City Or County'] + ', ' + d['State'];
         var slug = m.slugify(d['Incident Date'] + '-' + d['City Or County'] + '-' + d['State']);
@@ -672,11 +673,12 @@ var scrub = {
 
             // There are definitely more efficient ways to do this.
             var day = this.days[i];
+            var day_slug = m.slugify(day);
             this.events[day] = [];
             var len = m.data.length;
             for ( var j = 0; j < len; j ++ ) {
                 if ( m.data[j]['Incident Date'] == day ) {
-                    this.events[day].push(m.create_marker(m.data[j]));
+                    this.events[day].push(m.create_marker(m.data[j], 'active-pin ' + day_slug));
                 }
             }
         }
