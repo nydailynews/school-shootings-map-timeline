@@ -649,6 +649,7 @@ var scrub = {
         // I'm not sure I could have written a more dense description of these two variables.
         var day = scrub.days[i];
         var len = events[day].length;
+        this.scrubber.value(i);
         if ( len == 0 ) return;
         
         for ( i = 0; i < len; i ++ ) {
@@ -673,6 +674,7 @@ var scrub = {
         this.julian_date = (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
 
         this.scrubber.max(this.julian_date);
+        this.scrubber.step(1);
     }
 };
 
