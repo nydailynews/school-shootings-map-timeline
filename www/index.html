@@ -130,7 +130,7 @@
         <div>
 
 <div class="intro">
-    <p class="overline">school shootings</p>
+    <p class="overline">2018 school shootings</p>
     <h1>MAP: School shootings in the United States, 2018</h1>
     <div>
         <ul class="ra-share" id="ra-share-top" style="text-align: center;">
@@ -143,18 +143,18 @@
     <!--
     <p class="stamp">Updated Feb. 14, 2018</p>
     -->
-    <p id="datestamp" class="stamp">Published Feb. 15, 2018</p>
+    <p id="datestamp" class="stamp">Published Feb. 20, 2018</p>
     <p>
-        The Columbine school shootings turned "Columbine" from the name of a flower into a noun marking the start of an epidemic of school shootings in the United States.
+        The Columbine school massacre turned "Columbine" from the name of a flower into a noun marking the start of the modern of school shooting epidemic in the United States.
         Parkland may turn from the name of a town into a signpost in the sad history of school shootings here.
-        Watch our map-timeline of school shooting events, or filter events by location and severity.
+        Watch our map-timeline of 2018 school shootings, or filter events by location and severity.
     </p>
 </div>
 
 <section id="map">
     <form id="panel">
     <fieldset id="scrubber">
-        <legend>Play the timeline of 2018's school shootings:</legend>
+        <legend>Start the timeline of 2018's school shootings:</legend>
         <div id="controls">
             <button id="play" onClick="scrub.press_play(); return false;">Play Timeline</button>
         </div>
@@ -297,7 +297,7 @@
         }
     </script>
 
-    <p class="stamp">Data last updated Feb. 15, 2018</p>
+    <p class="stamp">Data last updated Feb. 20, 2018</p>
 </section>
 
 <div>
@@ -320,7 +320,6 @@ var m = {
     config: {
         dev: document.location.hash === '#dev' ? 1 : 0,
     },
-    map: L.map('shooting-map', { minZoom: 3, maxZoom: 9, zoomControl:false, scrollWheelZoom:false }).setView(center_point, 4),
     markers: [],
     tile: 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png',
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
@@ -435,6 +434,10 @@ var m = {
     },
     init: function()
     {
+        var zoom = 4;
+        if ( is_mobile === true ) zoom = 3;
+        this.map = L.map('shooting-map', { minZoom: 3, maxZoom: 9, zoomControl:false, scrollWheelZoom:false }).setView(center_point, zoom);
+
         // For reference: layer_group's are the reference markers, and clustergroup is the visible layer
         this.clustergroup = L.layerGroup();
         L.tileLayer(this.tile, {
