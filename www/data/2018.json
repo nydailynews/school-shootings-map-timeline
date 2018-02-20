@@ -10,7 +10,8 @@
     "lat": 42.907864,
     "long": -84.510642,
     "url": "",
-    "headline": ""
+    "headline": "",
+    "description": ""
   },
   {
     "Incident Date": "10-Jan-18",
@@ -23,7 +24,8 @@
     "lat": 31.475289,
     "long": -110.194585,
     "url": "",
-    "headline": ""
+    "headline": "",
+    "description": ""
   },
   {
     "Incident Date": "10-Jan-18",
@@ -36,7 +38,8 @@
     "lat": 34.178164,
     "long": -117.322148,
     "url": "",
-    "headline": ""
+    "headline": "",
+    "description": ""
   },
   {
     "Incident Date": "10-Jan-18",
@@ -49,7 +52,8 @@
     "lat": 33.704899,
     "long": -96.633578,
     "url": "",
-    "headline": ""
+    "headline": "",
+    "description": ""
   },
   {
     "Incident Date": "15-Jan-18",
@@ -62,7 +66,8 @@
     "lat": 32.538492,
     "long": -94.37521,
     "url": "",
-    "headline": ""
+    "headline": "",
+    "description": ""
   },
   {
     "Incident Date": "20-Jan-18",
@@ -75,7 +80,8 @@
     "lat": 36.135403,
     "long": -80.279227,
     "url": "",
-    "headline": ""
+    "headline": "",
+    "description": ""
   },
   {
     "Incident Date": "22-Jan-18",
@@ -88,7 +94,8 @@
     "lat": 32.180695,
     "long": -96.878526,
     "url": "http://www.nydailynews.com/news/national/shooting-reported-texas-school-gunman-custody-article-1.3771377",
-    "headline": "Teen gunman opens fire at Texas high school, wounds 15-year-old girl he reportedly had a relationship with"
+    "headline": "Teen gunman opens fire at Texas high school, wounds 15-year-old girl he reportedly had a relationship with",
+    "description": "A heartbroken teen gunman opened fire at a Texas high school Monday, wounding a 15-year-old girl he reportedly had a romantic relationship with."
   },
   {
     "Incident Date": "22-Jan-18",
@@ -101,7 +108,8 @@
     "lat": 30.026739,
     "long": -90.051637,
     "url": "",
-    "headline": ""
+    "headline": "",
+    "description": ""
   },
   {
     "Incident Date": "23-Jan-18",
@@ -114,7 +122,8 @@
     "lat": 36.912803,
     "long": -88.332763,
     "url": "http://www.nydailynews.com/news/national/ky-school-shooting-suspect-adult-prosecutors-article-1.3776012",
-    "headline": "Kentucky high school shooting suspect charged with murder, assault will be tried as an adult: prosecutors"
+    "headline": "Kentucky high school shooting suspect charged with murder, assault will be tried as an adult: prosecutors",
+    "description": "Screams of terror and a wave of chaos filled a Kentucky high school in the moments after a teenager unleashed a barrage of bullets on his classmates, witnesses said Wednesday."
   },
   {
     "Incident Date": "25-Jan-18",
@@ -127,7 +136,8 @@
     "lat": 30.683097,
     "long": -88.084736,
     "url": "",
-    "headline": ""
+    "headline": "",
+    "description": ""
   },
   {
     "Incident Date": "26-Jan-18",
@@ -140,7 +150,8 @@
     "lat": 42.308796,
     "long": -83.261711,
     "url": "",
-    "headline": ""
+    "headline": "",
+    "description": ""
   },
   {
     "Incident Date": "31-Jan-18",
@@ -153,7 +164,8 @@
     "lat": 40.043438,
     "long": -75.042536,
     "url": "",
-    "headline": ""
+    "headline": "",
+    "description": ""
   },
   {
     "Incident Date": "1-Feb-18",
@@ -166,7 +178,8 @@
     "lat": 34.061133,
     "long": -118.264883,
     "url": "",
-    "headline": ""
+    "headline": "",
+    "description": ""
   },
   {
     "Incident Date": "5-Feb-18",
@@ -179,7 +192,8 @@
     "lat": 38.797249,
     "long": -76.993634,
     "url": "",
-    "headline": ""
+    "headline": "",
+    "description": ""
   },
   {
     "Incident Date": "5-Feb-18",
@@ -192,7 +206,8 @@
     "lat": 45.020842,
     "long": -93.017706,
     "url": "",
-    "headline": ""
+    "headline": "",
+    "description": ""
   },
   {
     "Incident Date": "8-Feb-18",
@@ -205,7 +220,8 @@
     "lat": 40.827719,
     "long": -73.897001,
     "url": "",
-    "headline": ""
+    "headline": "",
+    "description": ""
   },
   {
     "Incident Date": "14-Feb-18",
@@ -214,10 +230,25 @@
     "City Or County": "Parkland",
     "State": "Florida",
     "killed": 17,
-    "injured": "unknown",
+    "injured": 14,
     "lat": 26.304503,
     "long": -80.269457,
     "url": "http://www.nydailynews.com/news/national/student-opens-fire-fla-high-school-kills-17-article-1.3820936",
-    "headline": "Expelled student armed with assault rifle slaughters 17 at Florida high school before arrested"
+    "headline": "Expelled student armed with assault rifle slaughters 17 at Florida high school before arrested",
+    "description": "Seventeen people were savagely murdered Wednesday when a student expelled from a Florida high school returned to the campus, pulled a fire alarm and gunned down his former classmates as they frantically filled the hallways, witnesses and officials said."
+  },
+  {
+    "Incident Date": "20-Feb-18",
+    "School": "Jackson Memorial Middle School",
+    "Address": "7355 Mudbrook St NW, Massillon, OH 44646",
+    "City Or County": "Massillon",
+    "State": "Ohio",
+    "killed": 0,
+    "injured": 1,
+    "lat": 40.867102,
+    "long": -81.486423,
+    "url": "http://www.nydailynews.com/news/national/middle-school-student-shoots-school-bathroom-article-1.3831067",
+    "headline": "Middle school student shoots himself in school bathroom",
+    "description": "A seventh grade student in Ohio shot himself in a school bathroom early Tuesday, authorities say"
   }
 ]

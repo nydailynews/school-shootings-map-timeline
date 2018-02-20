@@ -145,9 +145,9 @@
     -->
     <p id="datestamp" class="stamp">Published Feb. 20, 2018</p>
     <p>
-        The Columbine school massacre turned "Columbine" from the name of a flower into a noun marking the start of the modern of school shooting epidemic in the United States.
+        The Columbine school massacre turned "Columbine" from the name of a flower into a noun marking the start of the modern school shooting epidemic in the United States.
         Parkland may turn from the name of a town into a signpost in the sad history of school shootings here.
-        Watch our map-timeline of 2018 school shootings, or filter events by location and severity.
+        Watch our map-timeline of 2018 school shootings, or filter events by location and casualties.
     </p>
 </div>
 
@@ -327,6 +327,7 @@ var m = {
     marker_group: { 'all': [] },
     layer_group: {},
     info: L.control(),
+    infosub: L.control(),
     icon: function(classname) { 
         if ( typeof classname === 'undefined' ) classname = '';
         return new L.divIcon({
@@ -447,9 +448,7 @@ var m = {
 
         // INFO WINDOW
         // Functions that control the on-hover info windows
-        this.info.options = {
-            position: 'topleft'
-        };
+        this.info.options = { position: 'topleft' };
         this.info.onAdd = function (map) {
             this._div = L.DomUtil.create('div', 'info');
             this.update();
@@ -460,6 +459,18 @@ var m = {
             else this._div.innerHTML = name;
         }
         this.info.addTo(this.map);
+
+        this.infosub.options = { position: 'topright' };
+        this.infosub.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info');
+            this.update();
+            return this._div;
+        };
+        this.infosub.update = function (name) {
+            if ( typeof name === 'undefined' ) this._div.innerHTML = '';
+            else this._div.innerHTML = name;
+        }
+        this.infosub.addTo(this.map);
 
         this.marker_group = L.layerGroup().addTo(this.map);
         // An item looks like this:
@@ -664,15 +675,19 @@ var scrub = {
         var inter = setInterval( function() {
             scrub.play_date(i);
             i ++;
+            // WHEN THE TIMELINE COMPLETES
             if ( i >= scrub.julian_date ) {
                 clearInterval(inter);
                 this.in_play = 0;
                 play_button.textContent = 'Replay Timeline';
                 play_button.classList.remove('hide');
+                this.killed = 0;
+                this.injured = 0;
             }
         }, 300);
     },
-    deaths: 0,
+    killed: 0,
+    injured: 0,
     play_date: function(i) {
         // i is the number of days into the year we want to show.
         var day = scrub.days[i];
@@ -688,13 +703,14 @@ var scrub = {
         for ( var j = 0; j < len; j ++ ) {
             //if ( j == 0 ) loc += 
             console.log(this.events_meta[day][j]);
-            this.deaths += this.events_meta[day][j]['killed'];
+            this.killed += this.events_meta[day][j]['killed'];
+            this.injured += +this.events_meta[day][j]['injured'];
             m.clustergroup.addLayer(this.events[day][j]);
         }
         var s = 's';
         if ( len === 1 ) s = '';
-        m.info.update('<h3><span>' + m.numbers_lookup[len] + '</span> school shooting' + s + ' ' + day_long + '</h3>\n\
-        <p><span id="deaths">' + this.deaths + '</span> total deaths</p>');
+        m.info.update('<h3><span>' + m.numbers_lookup[len] + '</span> school shooting' + s + ' ' + day_long + '</h3>');
+        m.infosub.update('<p><span id="killed">' + this.killed + '</span> total killed, <span id="injured">' + this.injured + '</span> total injured</p>');
         setTimeout( function() {
             $('.' + day_slug).removeClass('active-pin');
             $('.' + day_slug).addClass('inactive-pin'); }, 100 );
