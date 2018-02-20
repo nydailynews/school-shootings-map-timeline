@@ -701,6 +701,11 @@ var scrub = {
         var len = this.events[day].length;
         this.scrubber.value(i+1);
 
+        if ( this.in_play == 0 ) {
+            var day_bits = day.split('-');
+            var day_long = this.months_lookup[day_bits[1]] + ' ' + day_bits[0];
+            m.info.update('<h3><span>' + day_long + '</span>, 2018</h3>');
+        }
         if ( len == 0 ) return;
         
         var day_bits = day.split('-');
@@ -715,7 +720,7 @@ var scrub = {
         }
         var s = 's';
         if ( len === 1 ) s = '';
-        m.info.update('<h3><span>' + m.numbers_lookup[len] + '</span> school shooting' + s + ' ' + day_long + '</h3>');
+        if ( this.in_play == 1 ) m.info.update('<h3><span>' + m.numbers_lookup[len] + '</span> school shooting' + s + ' ' + day_long + '</h3>');
         m.infosub.update('<p><span id="killed">' + this.killed + '</span> total killed, <span id="injured">' + this.injured + '</span> total injured</p>');
         setTimeout( function() {
             $('.' + day_slug).removeClass('active-pin');
