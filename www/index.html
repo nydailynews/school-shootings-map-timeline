@@ -684,11 +684,11 @@ var scrub = {
             // WHEN THE TIMELINE COMPLETES
             if ( i >= scrub.julian_date ) {
                 clearInterval(inter);
-                this.in_play = 0;
+                scrub.in_play = 0;
                 play_button.textContent = 'Replay Timeline';
                 play_button.classList.remove('hide');
-                this.killed = 0;
-                this.injured = 0;
+                scrub.killed = 0;
+                scrub.injured = 0;
             }
         }, 300);
     },
