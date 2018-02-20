@@ -370,7 +370,12 @@ var m = {
 
     },
     remove_markers: function(slug) {
+        // Remove a particular group's markers
         this.map.removeLayer(this.layer_group[slug]);
+    },
+    clear_all_markers: function() {
+        // Remove 'em all
+        this.clustergroup.clearLayers();
     },
     load_markers: function(slug) {
         // Given a slug that corresponds to a marker_group of markes, loop through them and add them to the map.
