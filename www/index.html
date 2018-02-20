@@ -460,6 +460,7 @@ var m = {
                 m.process_marker(data[i]);
             }
             panel.init();
+            scrub.init();
         });
         this.map.addLayer(this.clustergroup);
     }
@@ -618,44 +619,28 @@ var scrub = {
         this.in_play = 1;
         m.clear_all_markers();
 
-        // 2. Group the markers by day.
-        var data = m.data;
-        var events = {};
-        for ( var i = 0; i < this.julian_date; i ++ ) {
-
-            // There are definitely more efficient ways to do this.
-            var day = this.days[i];
-            events[day] = [];
-            var len = data.length;
-            for ( var j = 0; j < len; j ++ ) {
-                if ( data[j]['Incident Date'] == day ) {
-                    events[day].push(m.create_marker(data[j]));
-                }
-            }
-        }
-        console.log("DAYS", events);
-        // 3. Loop through the this.days() object
-        // 4. For each day, add the markers for that particular day.
-        // 5. Also, advance the scrubber.
+        // 2. Loop through the this.days() object
+        // 3. For each day, add the markers for that particular day.
+        // 4. Also, advance the scrubber.
         var i = 0;
         var inter = setInterval( function() {
-            scrub.play_date(events, i);
+            scrub.play_date(i);
             i ++;
             if ( i >= scrub.julian_date ) clearInterval(inter);
         }, 300);
         this.in_play = 0;
     },
-    play_date: function(events, i) {
+    play_date: function(i) {
         // events is an object with days for keys and markers in an array for the key on the day it happens.
         // i is the number of days into the year we're playing.
         // I'm not sure I could have written a more dense description of these two variables.
         var day = scrub.days[i];
-        var len = events[day].length;
+        var len = this.events[day].length;
         this.scrubber.value(i);
         if ( len == 0 ) return;
         
         for ( i = 0; i < len; i ++ ) {
-            m.clustergroup.addLayer(events[day][i]);
+            m.clustergroup.addLayer(this.events[day][i]);
         }
     },
     format_current_date: function(d) {
@@ -679,6 +664,21 @@ var scrub = {
         this.scrubber.step(1);
         this.scrubber.onValueChanged = function (value) {
             if ( this.in_play === 0 ) console.log(value); // the value at time of invocation
+        }
+
+        // Put together the map markers we need to be able to place on the map
+        this.events = {};
+        for ( var i = 0; i < this.julian_date; i ++ ) {
+
+            // There are definitely more efficient ways to do this.
+            var day = this.days[i];
+            this.events[day] = [];
+            var len = m.data.length;
+            for ( var j = 0; j < len; j ++ ) {
+                if ( m.data[j]['Incident Date'] == day ) {
+                    this.events[day].push(m.create_marker(m.data[j]));
+                }
+            }
         }
     }
 };
@@ -877,7 +877,6 @@ ScrubberView.prototype.attachListeners = function ()  {
   document.addEventListener('mouseup', stop);
   document.addEventListener('touchend', stop);
 };
-scrub.init();
 </script>
 <!-- CONTENT-END -->
 
