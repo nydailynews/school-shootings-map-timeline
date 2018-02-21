@@ -151,18 +151,17 @@
         “...any time a firearm discharges a live round inside or into a school building or on or onto a school campus or grounds, as documented by the press and, when necessary, confirmed through further inquiries with law enforcement or school officials. Incidents in which guns were brought into schools but not discharged are not included.”
     </blockquote>
     <p>
-        Watch our map-timeline of 2018 school shootings, or filter events by location and casualties.
+        Watch our map-timeline of 2018 school shootings, or filter shootings by the state the shooting happened in, or by casualties.
     </p>
 </div>
 
 <section id="map">
     <form id="panel">
     <fieldset id="scrubber">
-        <legend>Start the timeline of 2018's school shootings:</legend>
+        <legend>Start the timeline of 2018’s school shootings:</legend>
         <div id="controls">
             <button id="play" onClick="scrub.press_play(); return false;">Play Timeline</button>
         </div>
-        <p id="the-day"></p>
     </fieldset>
     
     <div id="shooting-map"></div>
@@ -312,10 +311,10 @@
 </main>
 
 <script src="//interactive.nydailynews.com/js/jquery.min.js"></script>
+<script src="//interactive.nydailynews.com/js/leaflet/1.2.0/leaflet.js"></script>
 <!--
 <script src="js/odometer.min.js"></script>
 -->
-<script src="//interactive.nydailynews.com/js/leaflet/1.2.0/leaflet.js"></script>
 <script>
 window.odometerOptions = {
   auto: true, // Don't automatically initialize everything with class 'odometer'
@@ -501,7 +500,7 @@ var m = {
             "long": -95.235711
           },
         */
-        $.getJSON('data/2018.json?v1', function(data) {
+        $.getJSON('data/2018.json?v2', function(data) {
             var len = data.length;
             m.data = data;
             shootings += len;
@@ -722,8 +721,8 @@ var scrub = {
         var s = 's';
         if ( len === 1 ) s = '';
         if ( this.in_play == 1 ) m.info.update('<h3><span>' + m.numbers_lookup[len] + '</span> school shooting' + s + ' ' + day_long + '</h3>');
-        document.getElementById('killed').textContent = this.killed;
-        document.getElementById('injured').textContent = this.injured;
+        document.getElementById('killed').innerHTML = this.killed;
+        document.getElementById('injured').innerHTML = this.injured;
         setTimeout( function() {
             $('.' + day_slug).removeClass('active-pin');
             $('.' + day_slug).addClass('inactive-pin'); }, 100 );
@@ -975,7 +974,6 @@ ScrubberView.prototype.attachListeners = function ()  {
   });
 
   this.elt.addEventListener('mouseup', function (evt) {
-    console.log('aaa');
     if (!mousedown) return;
     evt.preventDefault();
     if (self.orientation() === 'horizontal')

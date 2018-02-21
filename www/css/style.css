@@ -179,11 +179,11 @@ button#play {
 }
 .select select:hover ~ .select_arrow,
 .select select:focus ~ .select_arrow {
-	border-top-color: #33333;
+	border-top-color: #333;
 }
 
 .select select:disabled ~ .select_arrow {
-	border-top-color: #CCCCCC;
+	border-top-color: #CCC;
 }
 
 /*----- MAP -----*/
@@ -518,7 +518,6 @@ a {
   opacity: 1;
 }
 
-
 .odometer.odometer-auto-theme, .odometer.odometer-theme-minimal {
   display: inline-block;
   vertical-align: middle;
@@ -600,3 +599,4 @@ a {
   -o-transform: translateY(0);
   transform: translateY(0);
 }
+
