@@ -69,11 +69,15 @@ article h4 {
 	color: #1F618D;
 }
 
+article blockquote, 
 main p {
 	color: #333;
 	font: normal 17px "PT Serif", serif;
 	line-height: 25px;
 	margin-top: 15px;
+}
+article blockquote {
+	margin: 15px 150px 15px 80px;
 }
 
 div.intro p#datestamp + p:first-letter {
@@ -329,17 +333,20 @@ div.ad > span {
 
 }
 
-main p {
-	text-align: left;
-}
+	article blockquote {
+		margin: 15px 50px 15px 50px;
+	}
+	main p {
+		text-align: left;
+	}
 
 }
 /* TABLET-SPECIFIC */
 @media only screen and ( min-width: 728px ) and (max-width:1023px) {
-.intro p {
-	margin-left: 30px;
-	margin-right: 30px;
-}
+	.intro p {
+		margin-left: 30px;
+		margin-right: 30px;
+	}
 }
 /* HANDHELD & TABLET */
 @media only screen and ( min-width: 220px ) and (max-width:1023px) {

@@ -99,7 +99,7 @@
     <!-- ADS-END -->
 
     <link rel="stylesheet" href="//www.nydailynews.com/nydn/c/rh.css">
-    <link rel="stylesheet" href="css/style.css?v1">
+    <link rel="stylesheet" href="css/style.css?v2">
     <link rel="stylesheet" href="//interactive.nydailynews.com/js/leaflet/1.2.0/leaflet.css">
     <!--
     <link rel="stylesheet" href="//interactive.nydailynews.com/js/leaflet/markercluster/1.1.0/MarkerCluster.Default.css">
@@ -145,8 +145,12 @@
     -->
     <p id="datestamp" class="stamp">Published Feb. 21, 2018</p>
     <p>
-        The Columbine school massacre turned "Columbine" from the name of a flower into a noun marking the start of the modern school shooting epidemic in the United States.
-        Parkland may turn from the name of a town into a signpost in the sad history of school shootings here.
+        <a href="https://everytownresearch.org/school-shootings/">Everytown for Gun Safety defines a school shooting</a> as
+    </p>
+    <blockquote>
+        “...any time a firearm discharges a live round inside or into a school building or on or onto a school campus or grounds, as documented by the press and, when necessary, confirmed through further inquiries with law enforcement or school officials. Incidents in which guns were brought into schools but not discharged are not included.”
+    </blockquote>
+    <p>
         Watch our map-timeline of 2018 school shootings, or filter events by location and casualties.
     </p>
 </div>
@@ -295,7 +299,8 @@
         }
     </script>
 
-    <p class="stamp">Data last updated Feb. 20, 2018</p>
+    <p class="stamp">Data last updated Feb. 21, 2018</p>
+    <p class="stamp">Data courtesy Everytown for Gun Safety</p>
 </section>
 
 <div>
@@ -496,7 +501,7 @@ var m = {
             "long": -95.235711
           },
         */
-        $.getJSON('data/2018.json', function(data) {
+        $.getJSON('data/2018.json?v1', function(data) {
             var len = data.length;
             m.data = data;
             shootings += len;

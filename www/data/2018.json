@@ -1,14 +1,14 @@
 [
   {
-    "Incident Date": "3-Jan-18",
-    "School": "East Olive Elementary School",
-    "Address": "2583 Green Rd, St Johns, MI 48879",
-    "City Or County": "St. Johns",
-    "State": "Michigan",
-    "killed": 1,
+    "Incident Date": "4-Jan-18",
+    "School": "New Start High School",
+    "Address": "614 SW 120th St, Seattle, WA",
+    "City Or County": "Seattle",
+    "State": "Washington",
+    "killed": 0,
     "injured": 0,
-    "lat": 42.907864,
-    "long": -84.510642,
+    "lat": 47.496564,
+    "long": -122.34266,
     "url": "",
     "headline": "",
     "description": ""
