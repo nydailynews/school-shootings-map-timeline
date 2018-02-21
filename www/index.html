@@ -22,8 +22,8 @@
     <meta name="twitter:description" content="A map and timeline of school shootings in the U.S. in 2018, updated regularly" />
 
     <!-- KEYWORD -->
-    <meta name="keywords" content="school shootings,school shootings map" />
-    <meta name="news_keywords" content="school shootings,school shootings map,U.S. school shootings" />
+    <meta name="keywords" content="school shootings,school shootings map,school shootings 2018,school shootings timeline" />
+    <meta name="news_keywords" content="school shootings,school shootings map,U.S. school shootings,how many school shootings have there been this year" />
 
     <!-- LINK -->
     <link rel="canonical" href="http://interactive.nydailynews.com/map/school-shootings/">
@@ -143,7 +143,7 @@
     <!--
     <p class="stamp">Updated Feb. 14, 2018</p>
     -->
-    <p id="datestamp" class="stamp">Published Feb. 20, 2018</p>
+    <p id="datestamp" class="stamp">Published Feb. 21, 2018</p>
     <p>
         The Columbine school massacre turned "Columbine" from the name of a flower into a noun marking the start of the modern school shooting epidemic in the United States.
         Parkland may turn from the name of a town into a signpost in the sad history of school shootings here.
@@ -307,8 +307,17 @@
 </main>
 
 <script src="//interactive.nydailynews.com/js/jquery.min.js"></script>
+<!--
+<script src="js/odometer.min.js"></script>
+-->
 <script src="//interactive.nydailynews.com/js/leaflet/1.2.0/leaflet.js"></script>
 <script>
+window.odometerOptions = {
+  auto: true, // Don't automatically initialize everything with class 'odometer'
+  duration: 300, // Change how long the javascript expects the CSS animation to take
+  theme: 'minimal', // Specify the theme (if you have more than one theme css file on the page)
+  animation: 'count' // Count is a simpler animation method which just increments the value,
+};
 var center_point = [39.5,-98.35];
 var shootings = 0;
 var m = {
@@ -399,7 +408,7 @@ var m = {
         var loc = d['City Or County'] + ', ' + d['State'];
         var slug = m.slugify(d['Incident Date'] + '-' + d['City Or County'] + '-' + d['State']);
         var injured_str = d['injured'] + " injured, ";
-        if ( d['injured'] == "" ) injured_str = "";
+        if ( d['injured'] == '' ) injured_str = "";
 
         var link_str = '';
         if ( d['url'] !== '' ) link_str = '<p><a href=' + d['url'] + '>' + d['headline'] + '</a></p>';
@@ -708,7 +717,8 @@ var scrub = {
         var s = 's';
         if ( len === 1 ) s = '';
         if ( this.in_play == 1 ) m.info.update('<h3><span>' + m.numbers_lookup[len] + '</span> school shooting' + s + ' ' + day_long + '</h3>');
-        m.infosub.update('<p><span id="killed">' + this.killed + '</span> total killed, <span id="injured">' + this.injured + '</span> total injured</p>');
+        document.getElementById('killed').textContent = this.killed;
+        document.getElementById('injured').textContent = this.injured;
         setTimeout( function() {
             $('.' + day_slug).removeClass('active-pin');
             $('.' + day_slug).addClass('inactive-pin'); }, 100 );
@@ -734,13 +744,19 @@ var scrub = {
         this.scrubber.step(1);
         this.prev = 0;
         this.scrubber.onValueChanged = function (value) {
-            if ( scrub.in_play == 0 ) {
+            console.log("ACTION: SCRUB CHANGE FIRE");
+            if ( scrub.in_play == 0 && scrub.prev !== value ) {
+                console.log("ACTION: SCRUB CHANGE EXECUTE");
+                document.getElementById('total-caption').setAttribute('role', '');
                 scrub.show_date(value);
             }
         }
         this.scrubber.onScrubEnd = function (value) {
-            if ( scrub.in_play == 0 ) {
+            console.log("ACTION: SCRUB END FIRE");
+            if ( scrub.in_play == 0 && scrub.prev !== value ) {
+                console.log("ACTION: SCRUB END EXECUTE");
                 var i = 0;
+                scrub.prev = value;
                 scrub.killed = 0;
                 scrub.injured = 0;
                 m.clear_all_markers();
@@ -748,8 +764,11 @@ var scrub = {
                     scrub.play_date(i);
                     i ++;
                 }
+                document.getElementById('total-caption').setAttribute('role', 'alert');
             }
         }
+
+        m.infosub.update('<p id="total-caption"><span class="odometer" id="killed">0</span> total killed, <span class="odometer" id="injured">0</span> total injured</p>');
 
         // Put together the map markers we need to be able to place on the map
         this.events = {};
@@ -772,7 +791,7 @@ var scrub = {
     }
 };
 
-// From http://jsbin.com/iyexuVAR/8/edit?html,output
+// From  https://github.com/desmosinc/scrubber
 function ScrubberView() {
   this.makeAccessors();
   this.createDOM();
@@ -887,6 +906,9 @@ ScrubberView.prototype.attachListeners = function ()  {
     evt.preventDefault();
     self.onScrubStart(self.value());
 
+    document.addEventListener('mouseup', stop);
+    document.addEventListener('touchend', stop);
+
     mousedown = true;
     var rect = self.elt.getBoundingClientRect();
     // NOTE: page[X|Y]Offset and the width and height
@@ -905,6 +927,8 @@ ScrubberView.prototype.attachListeners = function ()  {
   };
 
   var stop = function () {
+    document.removeEventListener('mouseup', stop, true);
+    document.removeEventListener('touchend', stop, true);
     mousedown = false;
     cachedLeft = undefined;
     cachedWidth = undefined;
@@ -946,6 +970,7 @@ ScrubberView.prototype.attachListeners = function ()  {
   });
 
   this.elt.addEventListener('mouseup', function (evt) {
+    console.log('aaa');
     if (!mousedown) return;
     evt.preventDefault();
     if (self.orientation() === 'horizontal')
@@ -963,9 +988,8 @@ ScrubberView.prototype.attachListeners = function ()  {
       setValueFromPageY(evt.changedTouches[0].pageY);
   });
 
-  document.addEventListener('mouseup', stop);
-  document.addEventListener('touchend', stop);
 };
+
 function update_twitter(number_killed) {
     var a = document.getElementById('twitterlink');
     var old_href = a.getAttribute('href');
