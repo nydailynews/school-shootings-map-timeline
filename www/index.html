@@ -140,9 +140,7 @@
         </ul>
     </div>
 
-    <!--
-    <p class="stamp">Updated Feb. 14, 2018</p>
-    -->
+    <p class="stamp">Updated March 2</p>
     <p id="datestamp" class="stamp">Published Feb. 21, 2018</p>
     <p>
         <a href="https://everytownresearch.org/school-shootings/">Everytown for Gun Safety defines a school shooting</a> as
@@ -298,7 +296,7 @@
         }
     </script>
 
-    <p class="stamp">Data last updated Feb. 21, 2018</p>
+    <p class="stamp">Data last updated March 2, 2018</p>
     <p class="stamp">Data courtesy Everytown for Gun Safety</p>
 </section>
 
@@ -360,7 +358,7 @@ var m = {
     month_lookup: {
         'Jan': 'January',
         'Feb': 'February',
-        'Mar': 'March',
+        'March': 'March',
         'Apr': 'April',
         'May': 'May',
         'Jun': 'June',
@@ -500,7 +498,7 @@ var m = {
             "long": -95.235711
           },
         */
-        $.getJSON('data/2018.json?v2', function(data) {
+        $.getJSON('data/2018.json?v3', function(data) {
             var len = data.length;
             m.data = data;
             shootings += len;
