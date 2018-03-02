@@ -358,7 +358,7 @@ var m = {
     month_lookup: {
         'Jan': 'January',
         'Feb': 'February',
-        'March': 'March',
+        'Mar': 'March',
         'Apr': 'April',
         'May': 'May',
         'Jun': 'June',
@@ -741,6 +741,7 @@ var scrub = {
         // NUMBER OF DAYS IN THE YEAR via https://stackoverflow.com/questions/8619879/javascript-calculate-the-day-of-the-year-1-366
         var date = new Date();
         this.julian_date = (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
+        //this.julian_date += 1;
 
         this.scrubber.max(this.julian_date);
         this.scrubber.step(1);
