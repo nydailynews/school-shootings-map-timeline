@@ -342,5 +342,19 @@
     "url": "",
     "headline": "",
     "description": ""
+  },
+  {
+    "Incident Date": "20-Mar-18",
+    "School": "Great Mills High School",
+    "Address": "21130 Great Mills Rd, Great Mills, MD 20634",
+    "City Or County": "Great Mills",
+    "State": "Maryland",
+    "killed": 1,
+    "injured": 2,
+    "lat": 38.247436,
+    "long": -76.487419,
+    "url": "http://www.nydailynews.com/news/national/shooting-reported-maryland-high-school-article-1.3885583",
+    "headline": "Gunman killed, two students wounded in Maryland high school shooting",
+    "description": ""
   }
 ]
