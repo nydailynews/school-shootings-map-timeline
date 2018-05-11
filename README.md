@@ -1,4 +1,4 @@
-# [School shootings](http://interactive.nydailynews.com/map/school-shootings/)
+# [U.S. school shootings map](http://interactive.nydailynews.com/map/school-shootings/)
 
 ## How to update the school shootings map
 
