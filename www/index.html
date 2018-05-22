@@ -182,7 +182,7 @@
                 <option value="state-georgia">Georgia</option>
                 <option value="state-hawaii" disabled="disabled">Hawaii</option>
                 <option value="state-idaho" disabled="disabled">Idaho</option>
-                <option value="state-illinois" disabled="disabled">Illinois</option>
+                <option value="state-illinois">Illinois</option>
                 <option value="state-indiana" disabled="disabled">Indiana</option>
                 <option value="state-iowa" disabled="disabled">Iowa</option>
                 <option value="state-kansas" disabled="disabled">Kansas</option>
@@ -497,7 +497,7 @@ var m = {
             "long": -95.235711
           },
         */
-        $.getJSON('data/2018.json?v5b', function(data) {
+        $.getJSON('data/2018.json?v5c', function(data) {
             var len = data.length;
             m.data = data;
             shootings += len;
