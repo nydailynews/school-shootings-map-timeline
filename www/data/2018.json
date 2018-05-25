@@ -488,5 +488,19 @@
     "url": "http://www.nydailynews.com/news/national/texas-high-school-lock-active-shooter-situation-article-1.3996675",
     "headline": "Suspect in custody following active shooter situation at Texas high school, several injured",
     "description": ""
+  },
+  {
+    "Incident Date": "25-May-18",
+    "School": "Noblesville West Middle School",
+    "Address": "19900 Hague Rd, Noblesville, IN 46062",
+    "City Or County": "Noblesville",
+    "State": "Indiana",
+    "killed": 0,
+    "injured": 2,
+    "lat": 40.077018,
+    "long": -86.031447,
+    "url": "http://www.nydailynews.com/news/national/injured-shooting-indiana-middle-school-article-1.4009415",
+    "headline": "At least two injured in shooting at Indiana middle school, suspect in custody",
+    "description": ""
   }
 ]
